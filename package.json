@@ -1,0 +1,33 @@
+{
+  "name": "friends-social-network",
+  "version": "1.0.0",
+  "description": "A social media to share thoughts and comment on other friends thoughts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index",
+    "seed": "node utils/seed"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "6.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPloganathan/friends-social-network.git"
+  },
+  "keywords": [
+    "social",
+    "media",
+    "api"
+  ],
+  "author": "Sakthipriya Loganathan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SPloganathan/friends-social-network/issues"
+  },
+  "homepage": "https://github.com/SPloganathan/friends-social-network#readme"
+}
