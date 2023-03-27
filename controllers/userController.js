@@ -43,4 +43,30 @@ module.exports = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
+
+  // add friend to a user
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      {
+        _id: req.params.userId,
+      },
+      { $addToSet: { friends: req.params.friendId } },
+      { new: true }
+    )
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // delete friend from a user
+  deleteFriend(req, res) {
+    User.findOneAndUpdate(
+      {
+        _id: req.params.userId,
+      },
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    )
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => res.status(500).json(err));
+  },
 };
