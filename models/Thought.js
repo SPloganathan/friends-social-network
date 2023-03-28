@@ -1,25 +1,34 @@
 const { Schema, model, Types } = require("mongoose");
 const moment = require("moment");
 
-const reactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    default: new Types.ObjectId(),
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: Schema.Types.String,
+      required: true,
+      maxlength: 280,
+    },
+    username: {
+      type: Schema.Types.String,
+      required: true,
+    },
+    createdAt: {
+      type: Schema.Types.Date,
+      default: Date.now,
+      get: getReactionFormattedDate,
+    },
   },
-  reactionBody: {
-    type: Schema.Types.String,
-    required: true,
-    maxlength: 280,
-  },
-  username: {
-    type: Schema.Types.String,
-    required: true,
-  },
-  createdAt: {
-    type: Schema.Types.Date,
-    default: Date.now,
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
+);
 // Schema to create Thought model
 const thoughtSchema = new Schema(
   {
@@ -32,6 +41,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Schema.Types.Date,
       default: Date.now,
+      get: getThoughtsFormattedDate,
     },
 
     username: {
@@ -43,6 +53,7 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
@@ -53,12 +64,12 @@ thoughtSchema
   .get(function () {
     return this.reactions.length;
   });
-thoughtSchema.methods.getFormattedDate = function () {
-  return moment(this.createdAt).format("MM-DD-YYYY");
-};
-reactionSchema.methods.getFormattedDate = function () {
-  return moment(this.createdAt).format("MM-DD-YYYY");
-};
+function getThoughtsFormattedDate(createdAt) {
+  return moment(createdAt).format("MM-DD-YYYY HH:MM a");
+}
+function getReactionFormattedDate(createdAt) {
+  return moment(createdAt).format("MM-DD-YYYY HH:MM a");
+}
 
 // Initialize our Thought model
 const Thought = model("thought", thoughtSchema);
