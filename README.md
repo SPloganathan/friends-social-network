@@ -40,7 +40,7 @@ This project is licensed under The MIT License
 ## Deployed
 
 The walkthrough video link for this project
-## 
+## https://drive.google.com/file/d/1ndrYThnSRavdcmQqOlo5VmCQE68seGEA/view?usp=sharing
 
 ## Questions
 
